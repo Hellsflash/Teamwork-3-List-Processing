@@ -42,11 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CommandManager.cs" />
+    <Compile Include="Core\Engine.cs" />
+    <Compile Include="Interfaces\Core\ICommandManager.cs" />
+    <Compile Include="Interfaces\Core\IEngine.cs" />
+    <Compile Include="Interfaces\IO\IReader.cs" />
+    <Compile Include="Interfaces\IO\IWriter.cs" />
+    <Compile Include="IO\Reader.cs" />
+    <Compile Include="IO\Writer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
