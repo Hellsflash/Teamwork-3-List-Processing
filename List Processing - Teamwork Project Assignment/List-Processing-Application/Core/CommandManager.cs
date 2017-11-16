@@ -21,8 +21,9 @@ namespace List_Processing_Application.Core
 
         public string Reverse(string initial)
         {
-            var reversed = initial.Reverse().ToList();
-            return reversed.ToString();
+            var list = initial.Split(' ');
+            var revsed =list.Reverse();
+            return string.Join(" ", revsed);
         }
 
         public string Insert(IList<string> args, string initial)
