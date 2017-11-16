@@ -38,14 +38,14 @@ namespace List_Processing_Application.Core
 
         public string Delete(IList<string> args, string initial)
         {
+            var list = initial.Split(' ').ToList();
             var index = int.Parse(args[0]);
 
-            if (index < 0 || index > initial.Length - 1)
+            if (index < 0 || index > list.Count - 1)
             {
                 return $"Error: invalid index {index}";
             }
 
-            var list = initial.Split(' ').ToList();
             list.RemoveAt(index);
 
             return string.Join(" ", list);
