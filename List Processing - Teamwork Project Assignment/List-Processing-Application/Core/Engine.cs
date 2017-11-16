@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using List_Processing_Application.Interfaces.Commands;
 
 namespace List_Processing_Application.Core
 {
@@ -56,9 +55,9 @@ namespace List_Processing_Application.Core
                 case "Prepend":
                     return manager.Prepend(arguments, initilInput);
                 case "Reverse":
-                    return manager.Reverse(arguments);
+                    return manager.Reverse(initilInput);
                 case "Insert":
-                    return manager.Insert(arguments);
+                    return manager.Insert(arguments,initilInput);
                 case "Delete":
                     return manager.Delete(arguments);
                 case "RollLeft":

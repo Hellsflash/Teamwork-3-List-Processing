@@ -42,20 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AppendCommand.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\CountCommand.cs" />
-    <Compile Include="Commands\DeleteCommand.cs" />
-    <Compile Include="Commands\EndCommand.cs" />
-    <Compile Include="Commands\InsertCommand.cs" />
-    <Compile Include="Commands\PrependCommand.cs" />
-    <Compile Include="Commands\ReverseCommand.cs" />
-    <Compile Include="Commands\RollLeftCommand.cs" />
-    <Compile Include="Commands\RollRightCommand.cs" />
-    <Compile Include="Commands\SortCommand.cs" />
     <Compile Include="Core\CommandManager.cs" />
     <Compile Include="Core\Engine.cs" />
-    <Compile Include="Interfaces\Commands\ICommand.cs" />
     <Compile Include="Interfaces\Core\ICommandManager.cs" />
     <Compile Include="Interfaces\Core\IEngine.cs" />
     <Compile Include="Interfaces\IO\IReader.cs" />

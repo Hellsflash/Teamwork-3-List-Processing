@@ -6,12 +6,12 @@ namespace List_Processing_Application.Core
 {
     public class CommandManager
     {
-        public string Append(IList<string> args,string initial)
+        public string Append(IList<string> args, string initial)
         {
             return initial + " " + args[0].ToString();
         }
 
-        public string Prepend(IList<string> args,string initial)
+        public string Prepend(IList<string> args, string initial)
         {
             var revesed = initial.Split(' ').Reverse().ToList();
             revesed.Add(args[0]);
@@ -19,14 +19,20 @@ namespace List_Processing_Application.Core
             return string.Join(" ", revesed);
         }
 
-        public string Reverse(IList<string> args)
+        public string Reverse(string initial)
         {
-            throw new System.NotImplementedException();
+            var reversed = initial.Reverse().ToList();
+            return reversed.ToString();
         }
 
-        public string Insert(IList<string> args)
+        public string Insert(IList<string> args, string initial)
         {
-            throw new System.NotImplementedException();
+            var index = int.Parse(args[0]);
+            var arg = args[1];
+
+            var list = initial.Split(' ').ToList();
+            list.Insert(index,arg);
+            return string.Join(" ", list);
         }
 
         public string Delete(IList<string> args)
