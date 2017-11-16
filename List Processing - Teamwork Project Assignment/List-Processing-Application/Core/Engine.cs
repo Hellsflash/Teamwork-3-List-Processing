@@ -39,7 +39,7 @@ namespace List_Processing_Application.Core
         {
             return inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
-        private string ProcessInput(List<string> arguments,string initilInput)
+        private string ProcessInput(List<string> arguments,string initialInput)
         {
             string command = arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
             arguments.RemoveAt(0);
@@ -51,19 +51,19 @@ namespace List_Processing_Application.Core
             switch (command)
             {
                 case "Append":
-                    return manager.Append(arguments,initilInput);
+                    return manager.Append(arguments,initialInput);
                 case "Prepend":
-                    return manager.Prepend(arguments, initilInput);
+                    return manager.Prepend(arguments, initialInput);
                 case "Reverse":
-                    return manager.Reverse(initilInput);
+                    return manager.Reverse(initialInput);
                 case "Insert":
-                    return manager.Insert(arguments,initilInput);
+                    return manager.Insert(arguments,initialInput);
                 case "Delete":
-                    return manager.Delete(arguments);
+                    return manager.Delete(arguments, initialInput);
                 case "RollLeft":
-                    return manager.RollLeft(arguments);
+                    return manager.RollLeft(initialInput);
                 case "RollRight":
-                    return manager.RollRight(arguments);
+                    return manager.RollRight(initialInput);
                 case "Sort":
                     return manager.Sort(arguments);
                 case "Count":

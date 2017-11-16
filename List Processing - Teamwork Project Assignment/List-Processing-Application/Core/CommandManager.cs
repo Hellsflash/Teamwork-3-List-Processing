@@ -31,23 +31,57 @@ namespace List_Processing_Application.Core
             var arg = args[1];
 
             var list = initial.Split(' ').ToList();
-            list.Insert(index,arg);
+            list.Insert(index, arg);
             return string.Join(" ", list);
         }
 
-        public string Delete(IList<string> args)
+        public string Delete(IList<string> args, string initial)
         {
-            throw new System.NotImplementedException();
+            var index = int.Parse(args[0]);
+
+            if (index < 0 || index > initial.Length - 1)
+            {
+                return $"Error: invalid index {index}";
+            }
+
+            var list = initial.Split(' ').ToList();
+            list.RemoveAt(index);
+
+            return string.Join(" ", list);
         }
 
-        public string RollLeft(IList<string> args)
+        public string RollLeft(string initial)
         {
-            throw new System.NotImplementedException();
+            var list = initial.Split(' ').ToList();
+
+            var listEnd = list.Count - 1;
+            var shiftedElement = list[0];
+
+            for (int i = 0; i < listEnd; i++)
+            {
+                list[i] = list[i + 1];
+            }
+
+            list[listEnd] = shiftedElement;
+
+            return string.Join(" ", list);
         }
 
-        public string RollRight(IList<string> args)
+        public string RollRight(string initial)
         {
-            throw new System.NotImplementedException();
+            var list = initial.Split(' ').ToList();
+
+            var listEnd = list.Count - 1;
+            var shiftedElement = list[listEnd];
+
+            for (int i = listEnd; i > 0; i--)
+            {
+                list[i] = list[i - 1];
+            }
+
+            list[0] = shiftedElement;
+
+            return string.Join(" ", list);
         }
 
         public string Sort(IList<string> args)
