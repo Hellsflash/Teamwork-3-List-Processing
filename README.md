@@ -14,6 +14,7 @@ Trello link: https://trello.com/b/to6R87QJ
 ### Tasks allocation: 
 
   + Plamen Stoyanov: 
+	+	Design the project structure,
 	+	Create GitHub Repo, 
 	+	Implement the “delete” command,
 	+	Implement the “roll left” command,
@@ -21,6 +22,7 @@ Trello link: https://trello.com/b/to6R87QJ
 	
 	
   + Dimitur Nikolov: 
+	+	Design the project structure,
 	+	Create Trello Task management board,
 	+	Implement the “sort” command,
 	+	Implement the “count” command,
