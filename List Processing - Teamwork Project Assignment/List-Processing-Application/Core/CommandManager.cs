@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using List_Processing_Application.Interfaces.Core;
 
@@ -22,16 +23,27 @@ namespace List_Processing_Application.Core
         public string Reverse(string initial)
         {
             var list = initial.Split(' ');
-            var revsed =list.Reverse();
+            var revsed = list.Reverse();
             return string.Join(" ", revsed);
         }
 
         public string Insert(IList<string> args, string initial)
         {
             var index = int.Parse(args[0]);
+            if (args.Count < 2)
+            {
+                return $"Error: invalid command parameters";
+            }
+
             var arg = args[1];
 
             var list = initial.Split(' ').ToList();
+
+            if (index < 0 || index > list.Count - 1)
+            {
+                return $"Error: invalid index {index}";
+            }
+
             list.Insert(index, arg);
             return string.Join(" ", list);
         }

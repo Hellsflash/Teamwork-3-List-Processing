@@ -39,8 +39,21 @@ namespace List_Processing_Application.Core
         {
             return inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
-        private string ProcessInput(List<string> arguments,string initialInput)
+        private string ProcessInput(List<string> arguments, string initialInput)
         {
+            var availableCommands= new List<string>()
+            {
+                "Append",
+                "Prepend",
+                "Reverse",
+                "Insert",
+                "Delete",
+                "RollLeft",
+                "RollRight",
+                "Sort",
+                "Count",
+                "End"
+            };
             string command = arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
             arguments.RemoveAt(0);
             if (command == "Roll")
@@ -48,29 +61,34 @@ namespace List_Processing_Application.Core
                 command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
                 arguments.RemoveAt(0);
             }
-            switch (command)
+
+            if (!availableCommands.Contains(command))
             {
-                case "Append":
-                    return manager.Append(arguments,initialInput);
-                case "Prepend":
-                    return manager.Prepend(arguments, initialInput);
-                case "Reverse":
-                    return manager.Reverse(initialInput);
-                case "Insert":
-                    return manager.Insert(arguments,initialInput);
-                case "Delete":
-                    return manager.Delete(arguments, initialInput);
-                case "RollLeft":
-                    return manager.RollLeft(initialInput);
-                case "RollRight":
-                    return manager.RollRight(initialInput);
-                case "Sort":
-                    return manager.Sort(arguments);
-                case "Count":
-                    return manager.Count(arguments);
-                default:
-                    return manager.End(arguments);
+                return "Error: invalid command";
             }
+                switch (command)
+                {
+                    case "Append":
+                        return manager.Append(arguments, initialInput);
+                    case "Prepend":
+                        return manager.Prepend(arguments, initialInput);
+                    case "Reverse":
+                        return manager.Reverse(initialInput);
+                    case "Insert":
+                        return manager.Insert(arguments, initialInput);
+                    case "Delete":
+                        return manager.Delete(arguments, initialInput);
+                    case "RollLeft":
+                        return manager.RollLeft(initialInput);
+                    case "RollRight":
+                        return manager.RollRight(initialInput);
+                    case "Sort":
+                        return manager.Sort(arguments);
+                    case "Count":
+                        return manager.Count(arguments);
+                    default:
+                        return manager.End(arguments);
+                }
 
         }
         private bool ShouldEnd(string inputLine)
