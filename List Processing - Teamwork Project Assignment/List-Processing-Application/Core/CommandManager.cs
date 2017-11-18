@@ -50,6 +50,11 @@ namespace List_Processing_Application.Core
 
         public string Delete(IList<string> args, string initial)
         {
+            if (args.Count != 1)
+            {
+                throw new ArgumentException("Error: invalid command parameters");
+            }
+
             var list = initial.Split(' ').ToList();
             var index = int.Parse(args[0]);
 
