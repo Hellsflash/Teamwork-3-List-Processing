@@ -53,20 +53,20 @@ namespace List_Processing_Application.Core
         {
             var availableCommands= new List<string>()
             {
-                "Append",
-                "Prepend",
-                "Reverse",
-                "Insert",
-                "Delete",
-                "RollLeft",
-                "RollRight",
-                "Sort",
-                "Count",
-                "End"
+                "append",
+                "prepend",
+                "reverse",
+                "insert",
+                "delete",
+                "rollLeft",
+                "rollRight",
+                "sort",
+                "count",
+                "end"
             };
-            string command = arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
+            string command = arguments[0];
             arguments.RemoveAt(0);
-            if (command == "Roll")
+            if (command == "roll")
             {
                 command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
                 arguments.RemoveAt(0);
@@ -80,23 +80,23 @@ namespace List_Processing_Application.Core
             {
                 switch (command)
                 {
-                    case "Append":
+                    case "append":
                         return manager.Append(arguments, initialInput);
-                    case "Prepend":
+                    case "prepend":
                         return manager.Prepend(arguments, initialInput);
-                    case "Reverse":
+                    case "reverse":
                         return manager.Reverse(initialInput);
-                    case "Insert":
+                    case "insert":
                         return manager.Insert(arguments, initialInput);
-                    case "Delete":
+                    case "delete":
                         return manager.Delete(arguments, initialInput);
-                    case "RollLeft":
+                    case "rollLeft":
                         return manager.RollLeft(initialInput);
-                    case "RollRight":
+                    case "rollRight":
                         return manager.RollRight(initialInput);
-                    case "Sort":
+                    case "sort":
                         return manager.Sort(initialInput);
-                    case "Count":
+                    case "count":
                         return manager.Count(arguments);
                     default:
                         return manager.End();
