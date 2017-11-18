@@ -32,7 +32,7 @@ namespace List_Processing_Application.Core
             var index = int.Parse(args[0]);
             if (args.Count < 2)
             {
-                return $"Error: invalid command parameters";
+                throw new ArgumentException($"Error: invalid command parameters");
             }
 
             var arg = args[1];
@@ -41,7 +41,7 @@ namespace List_Processing_Application.Core
 
             if (index < 0 || index > list.Count - 1)
             {
-                return $"Error: invalid index {index}";
+                throw new ArgumentException($"Error: invalid index {index}");
             }
 
             list.Insert(index, arg);
@@ -55,7 +55,7 @@ namespace List_Processing_Application.Core
 
             if (index < 0 || index > list.Count - 1)
             {
-                return $"Error: invalid index {index}";
+                throw new ArgumentException($"Error: invalid index {index}");
             }
 
             list.RemoveAt(index);

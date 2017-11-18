@@ -29,11 +29,19 @@ namespace List_Processing_Application.Core
 
             while (isRunning)
             {
-                string inputLine = this.reader.ReadLine();
-                List<string> arguments = this.ParseInput(inputLine);
-                initialInput = this.ProcessInput(arguments, initialInput);
-                this.writer.WriteLine(initialInput);
-                isRunning = !this.ShouldEnd(inputLine);
+                try
+                {
+                    string inputLine = this.reader.ReadLine();
+                    List<string> arguments = this.ParseInput(inputLine);
+                    initialInput = this.ProcessInput(arguments, initialInput);
+                    this.writer.WriteLine(initialInput);
+                    isRunning = !this.ShouldEnd(inputLine);
+                }
+                catch (ArgumentException ae)
+                {
+                  Console.WriteLine(ae.Message);                  
+                }
+                
             }
         }
 
@@ -66,7 +74,7 @@ namespace List_Processing_Application.Core
 
             if (!availableCommands.Contains(command))
             {
-                return InvalidCommand;
+                throw new ArgumentException(InvalidCommand);
             }
             else
             {
