@@ -4,9 +4,12 @@ using System.Linq;
 namespace List_Processing_Application.Core
 {
     using System;
+    using System.Runtime.InteropServices;
     using Interfaces.Core;
     public class Engine : IEngine
     {
+        private const string InvalidCommand = "Error: invalid command";
+
         private CommandManager manager;
         private IReader reader;
         private IWriter writer;
@@ -28,10 +31,8 @@ namespace List_Processing_Application.Core
             {
                 string inputLine = this.reader.ReadLine();
                 List<string> arguments = this.ParseInput(inputLine);
-                initialInput = this.ProcessInput(arguments, initialInput);
-                this.writer.WriteLine(initialInput);
+                this.writer.WriteLine(this.ProcessInput(arguments, initialInput));
                 isRunning = !this.ShouldEnd(inputLine);
-
             }
         }
 
@@ -64,8 +65,10 @@ namespace List_Processing_Application.Core
 
             if (!availableCommands.Contains(command))
             {
-                return "Error: invalid command";
+                return InvalidCommand;
             }
+            else
+            {
                 switch (command)
                 {
                     case "Append":
@@ -83,13 +86,13 @@ namespace List_Processing_Application.Core
                     case "RollRight":
                         return manager.RollRight(initialInput);
                     case "Sort":
-                        return manager.Sort(arguments);
+                        return manager.Sort(initialInput);
                     case "Count":
                         return manager.Count(arguments);
                     default:
-                        return manager.End(arguments);
+                        return manager.End();
                 }
-
+            }   
         }
         private bool ShouldEnd(string inputLine)
         {

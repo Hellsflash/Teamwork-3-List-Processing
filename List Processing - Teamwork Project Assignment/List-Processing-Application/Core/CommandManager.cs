@@ -97,9 +97,13 @@ namespace List_Processing_Application.Core
             return string.Join(" ", list);
         }
 
-        public string Sort(IList<string> args)
+        public string Sort(string initial)
         {
-            throw new System.NotImplementedException();
+            var orderedList = initial.Split(' ')
+                .ToList()
+                .OrderBy(s => s);
+
+            return string.Join(" ", orderedList);
         }
 
         public string Count(IList<string> args)
@@ -107,9 +111,9 @@ namespace List_Processing_Application.Core
             throw new System.NotImplementedException();
         }
 
-        public string End(object argList)
+        public string End()
         {
-            throw new System.NotImplementedException();
+            return "Finished";
         }
     }
 }
