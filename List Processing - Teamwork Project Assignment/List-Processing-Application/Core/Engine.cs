@@ -31,7 +31,8 @@ namespace List_Processing_Application.Core
             {
                 string inputLine = this.reader.ReadLine();
                 List<string> arguments = this.ParseInput(inputLine);
-                this.writer.WriteLine(this.ProcessInput(arguments, initialInput));
+                initialInput = this.ProcessInput(arguments, initialInput);
+                this.writer.WriteLine(initialInput);
                 isRunning = !this.ShouldEnd(inputLine);
             }
         }
