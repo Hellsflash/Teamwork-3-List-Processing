@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace List_Processing_Application.Core
+﻿namespace List_Processing_Application.Core
 {
     using System;
-    using System.Runtime.InteropServices;
     using Interfaces.Core;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Engine : IEngine
     {
         private const string InvalidCommand = "Error: invalid command";
@@ -20,6 +19,7 @@ namespace List_Processing_Application.Core
             this.reader = new Reader();
             this.manager = new CommandManager();
         }
+
         public void Run()
         {
             bool isRunning = true;
@@ -39,9 +39,8 @@ namespace List_Processing_Application.Core
                 }
                 catch (ArgumentException ae)
                 {
-                  Console.WriteLine(ae.Message);                  
+                    Console.WriteLine(ae.Message);
                 }
-                
             }
         }
 
@@ -49,9 +48,10 @@ namespace List_Processing_Application.Core
         {
             return inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
+
         private string ProcessInput(List<string> arguments, string initialInput)
         {
-            var availableCommands= new List<string>()
+            var availableCommands = new List<string>()
             {
                 "append",
                 "prepend",
@@ -82,27 +82,37 @@ namespace List_Processing_Application.Core
                 {
                     case "append":
                         return manager.Append(arguments, initialInput);
+
                     case "prepend":
                         return manager.Prepend(arguments, initialInput);
+
                     case "reverse":
                         return manager.Reverse(initialInput);
+
                     case "insert":
                         return manager.Insert(arguments, initialInput);
+
                     case "delete":
                         return manager.Delete(arguments, initialInput);
+
                     case "rollLeft":
                         return manager.RollLeft(initialInput);
+
                     case "rollRight":
                         return manager.RollRight(initialInput);
+
                     case "sort":
                         return manager.Sort(initialInput);
+
                     case "count":
                         return manager.Count(arguments);
+
                     default:
                         return manager.End();
                 }
-            }   
+            }
         }
+
         private bool ShouldEnd(string inputLine)
         {
             return inputLine.Equals("end");
