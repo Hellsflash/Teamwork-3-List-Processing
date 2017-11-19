@@ -72,7 +72,7 @@
                 case "sort":
                     return manager.Sort(arguments, initialInput);
                 case "end":
-                    return manager.End();
+                    return manager.End(arguments);
                 default:
                     throw new ArgumentException(InvalidCommand);
             }
