@@ -33,8 +33,16 @@
                 {
                     string inputLine = this.reader.ReadLine();
                     List<string> arguments = this.ParseInput(inputLine);
-                    initialInput = this.ProcessInput(arguments, initialInput);
-                    this.writer.WriteLine(initialInput);
+                    var processed = this.ProcessInput(arguments, initialInput);
+                    if (int.TryParse(processed, out int counte))
+                    {
+                        this.writer.WriteLine(counte.ToString());
+                    }
+                    else
+                    {
+                        initialInput = processed;
+                        this.writer.WriteLine(initialInput);
+                    }
                     isRunning = !this.ShouldEnd(inputLine);
                 }
                 catch (ArgumentException ae)
