@@ -53,50 +53,28 @@
         {
             string command = arguments[0];
 
-            arguments.RemoveAt(0);
-
-            if (arguments.Count == 0)
+            switch (command)
             {
-                switch (command)
-                {
-                    case "reverse":
-                        return manager.Reverse(initialInput);
-                    case "sort":
-                        return manager.Sort(initialInput);
-                    case "end":
-                        return manager.End();
-                    default:
-                        throw new ArgumentException(InvalidCommand);
-                }
-            }
-            else if (arguments.Count == 1)
-            {
-                switch (command)
-                {
-                    case "append":
-                        return manager.Append(arguments, initialInput);
-                    case "prepend":
-                        return manager.Prepend(arguments, initialInput);
-                    case "roll":
-                        return manager.Roll(arguments, initialInput);
-                    case "delete":
-                        return manager.Delete(arguments, initialInput);
-                    case "count":
-                        return manager.Count(arguments, initialInput);
-                    default:
-                        throw new ArgumentException(InvalidCommand);
-                }
-            }
-            else
-            {
-                if (command != "insert")
-                {
-                    throw new ArgumentException(InvalidCommand);
-                }
-                else
-                {
+                case "append":
+                    return manager.Append(arguments, initialInput);
+                case "prepend":
+                    return manager.Prepend(arguments, initialInput);
+                case "roll":
+                    return manager.Roll(arguments, initialInput);
+                case "insert":
                     return manager.Insert(arguments, initialInput);
-                }
+                case "delete":
+                    return manager.Delete(arguments, initialInput);
+                case "count":
+                    return manager.Count(arguments, initialInput);
+                case "reverse":
+                    return manager.Reverse(arguments, initialInput);
+                case "sort":
+                    return manager.Sort(arguments, initialInput);
+                case "end":
+                    return manager.End();
+                default:
+                    throw new ArgumentException(InvalidCommand);
             }
         }
 

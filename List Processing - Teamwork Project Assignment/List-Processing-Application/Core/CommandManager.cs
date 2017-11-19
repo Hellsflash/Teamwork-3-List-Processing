@@ -34,8 +34,12 @@ namespace List_Processing_Application.Core
             return string.Join(" ", revesed);
         }
 
-        public string Reverse(string initial)
+        public string Reverse(IList<string> args,  string initial)
         {
+            if (args.Count > 1)
+            {
+                throw new ArgumentException(InvalidCommandParameters);
+            }
             var list = initial.Split(' ');
             var revsed = list.Reverse();
             return string.Join(" ", revsed);
@@ -153,8 +157,12 @@ namespace List_Processing_Application.Core
         //    return string.Join(" ", list);
         //}
 
-        public string Sort(string initial)
+        public string Sort(IList<string> args, string initial)
         {
+            if (args.Count > 1)
+            {
+                throw new ArgumentException(InvalidCommandParameters);
+            }
             var orderedList = initial.Split(' ')
                 .ToList()
                 .OrderBy(s => s);
@@ -162,7 +170,7 @@ namespace List_Processing_Application.Core
             return string.Join(" ", orderedList);
         }
 
-        public int Count(IList<string> args, string initial)
+        public string Count(IList<string> args, string initial)
         {
             var list = initial.Split(' ').ToList();
             var counter = 0;
@@ -176,7 +184,7 @@ namespace List_Processing_Application.Core
                 }             
             }
 
-            return counter;
+            return counter.ToString();
         }
 
         public string End()
