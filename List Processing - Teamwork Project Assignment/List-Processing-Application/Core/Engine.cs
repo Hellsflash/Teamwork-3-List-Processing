@@ -66,7 +66,7 @@
             };
             string command = arguments[0];
             arguments.RemoveAt(0);
-            if (command == "roll")
+            if (command == "roll" && arguments.Count == 1)
             {
                 command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
                 arguments.RemoveAt(0);
