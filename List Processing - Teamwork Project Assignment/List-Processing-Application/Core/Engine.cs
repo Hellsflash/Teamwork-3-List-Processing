@@ -8,7 +8,6 @@
     public class Engine : IEngine
     {
         private const string InvalidCommand = "Error: invalid command";
-        private const string InvalidCommandParams = "Error: invalid command parameters";
 
         private CommandManager manager;
         private IReader reader;
@@ -54,71 +53,51 @@
         {
             string command = arguments[0];
 
-            if (arguments.Count < 0 && arguments.Count > 3)
-            {
-                throw new ArgumentException(InvalidCommandParams);
-            }
-
-            //var availableCommands = new List<string>()
-            //{
-            //    "append",
-            //    "prepend",
-            //    "reverse",
-            //    "insert",
-            //    "delete",
-            //    "rollLeft",
-            //    "rollRight",
-            //    "sort",
-            //    "count",
-            //    "end"
-            //};
             arguments.RemoveAt(0);
-            if (command == "roll" && arguments.Count == 1)
+
+            if (arguments.Count == 0)
             {
-                command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
-                arguments.RemoveAt(0);
+                switch (command)
+                {
+                    case "reverse":
+                        return manager.Reverse(initialInput);
+                    case "sort":
+                        return manager.Sort(initialInput);
+                    case "end":
+                        return manager.End();
+                    default:
+                        throw new ArgumentException(InvalidCommand);
+                }
             }
-
-            //if (!availableCommands.Contains(command))
-            //{
-            //    throw new ArgumentException(InvalidCommand);
-            //}
-            //else
-            //{
-            switch (command)
+            else if (arguments.Count == 1)
             {
-                case "append":
-                    return manager.Append(arguments, initialInput);
-
-                case "prepend":
-                    return manager.Prepend(arguments, initialInput);
-
-                case "reverse":
-                    return manager.Reverse(initialInput);
-
-                case "insert":
-                    return manager.Insert(arguments, initialInput);
-
-                case "delete":
-                    return manager.Delete(arguments, initialInput);
-
-                case "rollLeft":
-                    return manager.RollLeft(initialInput);
-
-                case "rollRight":
-                    return manager.RollRight(initialInput);
-
-                case "sort":
-                    return manager.Sort(initialInput);
-
-                case "count":
-                    return manager.Count(arguments);
-                case "end":
-                    return manager.End();
-                default:
+                switch (command)
+                {
+                    case "append":
+                        return manager.Append(arguments, initialInput);
+                    case "prepend":
+                        return manager.Prepend(arguments, initialInput);
+                    case "roll":
+                        return manager.Roll(arguments, initialInput);
+                    case "delete":
+                        return manager.Delete(arguments, initialInput);
+                    case "count":
+                        return manager.Count(arguments, initialInput);
+                    default:
+                        throw new ArgumentException(InvalidCommand);
+                }
+            }
+            else
+            {
+                if (command != "insert")
+                {
                     throw new ArgumentException(InvalidCommand);
+                }
+                else
+                {
+                    return manager.Insert(arguments, initialInput);
+                }
             }
-            //}
         }
 
         private bool ShouldEnd(string inputLine)

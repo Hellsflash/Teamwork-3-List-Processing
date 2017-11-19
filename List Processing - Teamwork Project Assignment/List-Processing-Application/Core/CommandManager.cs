@@ -5,13 +5,17 @@ using List_Processing_Application.Interfaces.Core;
 
 namespace List_Processing_Application.Core
 {
+    using System.Runtime.InteropServices;
+
     public class CommandManager
     {
+        private const string InvalidCommandParameters = "Error: invalid command parameters";
+
         public string Append(IList<string> args, string initial)
         {
             if (args.Count != 1)
             {
-                throw new ArgumentException("Error: invalid command parameters");
+                throw new ArgumentException(InvalidCommandParameters);
             }
 
             return initial + " " + args[0].ToString();
@@ -21,7 +25,7 @@ namespace List_Processing_Application.Core
         {
             if (args.Count != 1)
             {
-                throw new ArgumentException("Error: invalid command parameters");
+                throw new ArgumentException(InvalidCommandParameters);
             }
 
             var revesed = initial.Split(' ').Reverse().ToList();
@@ -42,7 +46,7 @@ namespace List_Processing_Application.Core
             var index = int.Parse(args[0]);
             if (args.Count < 2)
             {
-                throw new ArgumentException($"Error: invalid command parameters");
+                throw new ArgumentException(InvalidCommandParameters);
             }
 
             var arg = args[1];
@@ -65,7 +69,7 @@ namespace List_Processing_Application.Core
 
             if (args.Count != 1 || !int.TryParse(args[0], out int index))
             {
-                throw new ArgumentException("Error: invalid command parameters");
+                throw new ArgumentException(InvalidCommandParameters);
             }
 
             if (index < 0 || index > list.Count - 1)
@@ -78,39 +82,76 @@ namespace List_Processing_Application.Core
             return string.Join(" ", list);
         }
 
-        public string RollLeft(string initial)
+        public string Roll(IList<string> args, string initial)
         {
             var list = initial.Split(' ').ToList();
+            var direction = args[0];
 
-            var listEnd = list.Count - 1;
-            var shiftedElement = list[0];
-
-            for (int i = 0; i < listEnd; i++)
+            if (direction == "left")
             {
-                list[i] = list[i + 1];
-            }
+                var listEnd = list.Count - 1;
+                var shiftedElement = list[0];
 
-            list[listEnd] = shiftedElement;
+                for (int i = 0; i < listEnd; i++)
+                {
+                    list[i] = list[i + 1];
+                }
+
+                list[listEnd] = shiftedElement;
+            }
+            else if (direction == "right")
+            {
+                var listEnd = list.Count - 1;
+                var shiftedElement = list[listEnd];
+
+                for (int i = listEnd; i > 0; i--)
+                {
+                    list[i] = list[i - 1];
+                }
+
+                list[0] = shiftedElement;
+            }
+            else
+            {
+                throw new ArgumentException(InvalidCommandParameters);
+            }
 
             return string.Join(" ", list);
         }
 
-        public string RollRight(string initial)
-        {
-            var list = initial.Split(' ').ToList();
+        //public string RollLeft(string initial)
+        //{
+        //    var list = initial.Split(' ').ToList();
 
-            var listEnd = list.Count - 1;
-            var shiftedElement = list[listEnd];
+        //    var listEnd = list.Count - 1;
+        //    var shiftedElement = list[0];
 
-            for (int i = listEnd; i > 0; i--)
-            {
-                list[i] = list[i - 1];
-            }
+        //    for (int i = 0; i < listEnd; i++)
+        //    {
+        //        list[i] = list[i + 1];
+        //    }
 
-            list[0] = shiftedElement;
+        //    list[listEnd] = shiftedElement;
 
-            return string.Join(" ", list);
-        }
+        //    return string.Join(" ", list);
+        //}
+
+        //public string RollRight(string initial)
+        //{
+        //    var list = initial.Split(' ').ToList();
+
+        //    var listEnd = list.Count - 1;
+        //    var shiftedElement = list[listEnd];
+
+        //    for (int i = listEnd; i > 0; i--)
+        //    {
+        //        list[i] = list[i - 1];
+        //    }
+
+        //    list[0] = shiftedElement;
+
+        //    return string.Join(" ", list);
+        //}
 
         public string Sort(string initial)
         {
@@ -121,9 +162,21 @@ namespace List_Processing_Application.Core
             return string.Join(" ", orderedList);
         }
 
-        public string Count(IList<string> args)
+        public int Count(IList<string> args, string initial)
         {
-            throw new System.NotImplementedException();
+            var list = initial.Split(' ').ToList();
+            var counter = 0;
+            var wantedString = args[0];
+
+            foreach (var element in list)
+            {
+                if (element == wantedString)
+                {
+                    counter++;
+                }             
+            }
+
+            return counter;
         }
 
         public string End()
