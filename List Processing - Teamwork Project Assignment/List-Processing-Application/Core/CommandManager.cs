@@ -9,11 +9,21 @@ namespace List_Processing_Application.Core
     {
         public string Append(IList<string> args, string initial)
         {
+            if (args.Count != 1)
+            {
+                throw new ArgumentException("Error: invalid command parameters");
+            }
+
             return initial + " " + args[0].ToString();
         }
 
         public string Prepend(IList<string> args, string initial)
         {
+            if (args.Count != 1)
+            {
+                throw new ArgumentException("Error: invalid command parameters");
+            }
+
             var revesed = initial.Split(' ').Reverse().ToList();
             revesed.Add(args[0]);
             revesed.Reverse();
