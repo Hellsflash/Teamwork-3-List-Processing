@@ -59,65 +59,66 @@
                 throw new ArgumentException(InvalidCommandParams);
             }
 
-            var availableCommands = new List<string>()
-            {
-                "append",
-                "prepend",
-                "reverse",
-                "insert",
-                "delete",
-                "rollLeft",
-                "rollRight",
-                "sort",
-                "count",
-                "end"
-            };
+            //var availableCommands = new List<string>()
+            //{
+            //    "append",
+            //    "prepend",
+            //    "reverse",
+            //    "insert",
+            //    "delete",
+            //    "rollLeft",
+            //    "rollRight",
+            //    "sort",
+            //    "count",
+            //    "end"
+            //};
             arguments.RemoveAt(0);
             if (command == "roll" && arguments.Count == 1)
             {
                 command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
                 arguments.RemoveAt(0);
             }
-            
-            if (!availableCommands.Contains(command))
+
+            //if (!availableCommands.Contains(command))
+            //{
+            //    throw new ArgumentException(InvalidCommand);
+            //}
+            //else
+            //{
+            switch (command)
             {
-                throw new ArgumentException(InvalidCommand);
+                case "append":
+                    return manager.Append(arguments, initialInput);
+
+                case "prepend":
+                    return manager.Prepend(arguments, initialInput);
+
+                case "reverse":
+                    return manager.Reverse(initialInput);
+
+                case "insert":
+                    return manager.Insert(arguments, initialInput);
+
+                case "delete":
+                    return manager.Delete(arguments, initialInput);
+
+                case "rollLeft":
+                    return manager.RollLeft(initialInput);
+
+                case "rollRight":
+                    return manager.RollRight(initialInput);
+
+                case "sort":
+                    return manager.Sort(initialInput);
+
+                case "count":
+                    return manager.Count(arguments);
+                case "end":
+                    return manager.End();
+                default:
+                    throw new ArgumentException(InvalidCommand);
             }
-            else
-            {
-                switch (command)
-                {
-                    case "append":
-                        return manager.Append(arguments, initialInput);
-
-                    case "prepend":
-                        return manager.Prepend(arguments, initialInput);
-
-                    case "reverse":
-                        return manager.Reverse(initialInput);
-
-                    case "insert":
-                        return manager.Insert(arguments, initialInput);
-
-                    case "delete":
-                        return manager.Delete(arguments, initialInput);
-
-                    case "rollLeft":
-                        return manager.RollLeft(initialInput);
-
-                    case "rollRight":
-                        return manager.RollRight(initialInput);
-
-                    case "sort":
-                        return manager.Sort(initialInput);
-
-                    case "count":
-                        return manager.Count(arguments);
-
-                    default:
-                        return manager.End();
-                }
-            }
+            //}
         }
 
         private bool ShouldEnd(string inputLine)
