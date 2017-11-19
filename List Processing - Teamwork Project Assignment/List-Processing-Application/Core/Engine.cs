@@ -8,6 +8,7 @@
     public class Engine : IEngine
     {
         private const string InvalidCommand = "Error: invalid command";
+        private const string InvalidCommandParams = "Error: invalid command parameters";
 
         private CommandManager manager;
         private IReader reader;
@@ -51,6 +52,13 @@
 
         private string ProcessInput(List<string> arguments, string initialInput)
         {
+            string command = arguments[0];
+
+            if (arguments.Count < 0 && arguments.Count > 3)
+            {
+                throw new ArgumentException(InvalidCommandParams);
+            }
+
             var availableCommands = new List<string>()
             {
                 "append",
@@ -64,14 +72,13 @@
                 "count",
                 "end"
             };
-            string command = arguments[0];
             arguments.RemoveAt(0);
             if (command == "roll" && arguments.Count == 1)
             {
                 command += arguments[0].First().ToString().ToUpper() + arguments[0].Substring(1);
                 arguments.RemoveAt(0);
             }
-
+            
             if (!availableCommands.Contains(command))
             {
                 throw new ArgumentException(InvalidCommand);

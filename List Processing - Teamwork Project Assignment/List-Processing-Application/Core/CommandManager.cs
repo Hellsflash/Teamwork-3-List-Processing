@@ -52,9 +52,8 @@ namespace List_Processing_Application.Core
         {
 
             var list = initial.Split(' ').ToList();
-            int index;
 
-            if (args.Count != 1 || !int.TryParse(args[0], out index))
+            if (args.Count != 1 || !int.TryParse(args[0], out int index))
             {
                 throw new ArgumentException("Error: invalid command parameters");
             }
